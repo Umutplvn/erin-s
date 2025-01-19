@@ -48,4 +48,9 @@ const adminSchema = new mongoose.Schema({
 
 }, {collection:"admins", timeStamps:true})
 
+
+
+
+
+
 module.exports =mongoose.model("Admin", adminSchema)
