@@ -44,6 +44,11 @@ const adminSchema = new mongoose.Schema({
         required: true
     },
 
+    isConfirmedAdmin:{
+        type:Boolean,
+        default:false
+    }
+
 
 
 }, {collection:"admins", timeStamps:true})
