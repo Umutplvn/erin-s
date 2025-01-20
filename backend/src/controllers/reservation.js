@@ -27,9 +27,9 @@ module.exports = {
           .status(400)
           .json({ message: "This time slot is fully booked." });
       }
-      const randomId = uuidv4()
+      const reservationQrId = uuidv4()
       const qrCode = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
-        randomId
+        reservationQrId
       )}`;
 
       const data = await Reservation.create({
@@ -40,13 +40,13 @@ module.exports = {
         phone,
         guests,
         qrCode,
-        randomId
+        reservationQrId
       });
 
       res.status(201).send({
         error: false,
         data,
-        randomId,
+        reservationQrId,
       });
     } catch (error) {
       res.status(500).json({ message: "Error creating reservation", error });
@@ -54,7 +54,8 @@ module.exports = {
   },
 
   read: async (req, res) => {
-    const data = await Reservation.findOne({ _id: req.params.id });
+    const { reservationId } = req.body;
+    const data = await Reservation.findOne({ _id: reservationId });
 
     res.status(200).send({
       error: false,
@@ -63,10 +64,10 @@ module.exports = {
   },
 
   scan:async(req, res)=>{
-    const { randomId } = req.params; 
+    const { reservationQrId } = req.params; 
 
     try {
-      const data = await Reservation.findOne({ randomId });
+      const data = await Reservation.findOne({ reservationQrId });
       if (!data) {
         return res.status(404).json({ message: "Reservation not found." });
       }
@@ -83,9 +84,7 @@ module.exports = {
 
 
   update: async (req, res) => {
-    const { reservationId } = req.body;
-
-    await Reservation.updateOne({ _id: reservationId }, req.body, {
+    await Reservation.updateOne({ _id: req.params.reservationId }, req.body, {
       runValidators: true,
     });
 

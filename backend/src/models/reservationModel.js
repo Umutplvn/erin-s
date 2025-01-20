@@ -53,7 +53,7 @@ const reservationSchema = new mongoose.Schema(
       required: true,
     },
 
-    randomId: { type: String, required: true, unique: true },
+    reservationQrId: { type: String, required: true, unique: true },
   },
   { collection: "reservation", timeStamps: true }
 );
