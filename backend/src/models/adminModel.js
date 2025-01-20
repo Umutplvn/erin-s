@@ -9,27 +9,18 @@ const mongoose=require("mongoose")
 
 const adminSchema = new mongoose.Schema({
 
-    username:{
-        type:String,
-        trim: true,
-        required: true,
-        unique: true,
-        index: true
-
-    },
-
-    password: {
-        type: String,
-        trim: true,
-        required: true
-    },
-
     email: {
         type: String,
         trim: true,
         required: true,
         unique: true,
         index: true
+    },
+
+    password: {
+        type: String,
+        trim: true,
+        required: true
     },
 
     first_name: {
