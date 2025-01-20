@@ -6,6 +6,7 @@
 
 const express = require("express");
 const mongoose = require("mongoose");
+const { v4: uuidv4 } = require("uuid");
 
 const reservationSchema = new mongoose.Schema(
   {
@@ -13,7 +14,6 @@ const reservationSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      unique: true,
       index: true,
     },
 
@@ -50,10 +50,16 @@ const reservationSchema = new mongoose.Schema(
     qrCode: {
       type: String,
       trim: true,
-      required: true,
+      required: true
+      
     },
 
-    reservationQrId: { type: String, required: true, unique: true },
+    reservationQrId: {
+      type: String, 
+      required: true,
+      unique: true,
+      default: uuidv4
+      },
   },
   { collection: "reservation", timeStamps: true }
 );

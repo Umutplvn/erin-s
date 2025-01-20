@@ -19,6 +19,7 @@ module.exports = {
 
   create: async (req, res) => {
     const { date, timeSlot, full_name, email, phone, guests } = req.body;
+    const reservationQrId = uuidv4()
 
     try {
       const count = await Reservation.countDocuments({ date, timeSlot });
@@ -27,10 +28,9 @@ module.exports = {
           .status(400)
           .json({ message: "This time slot is fully booked." });
       }
-      const reservationQrId = uuidv4()
-      const qrCode = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
-        reservationQrId
-      )}`;
+      
+
+      const qrCode = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${reservationQrId}`;
 
       const data = await Reservation.create({
         date,
@@ -84,13 +84,14 @@ module.exports = {
 
 
   update: async (req, res) => {
+
     await Reservation.updateOne({ _id: req.params.reservationId }, req.body, {
       runValidators: true,
     });
 
     res.status(200).send({
       error: false,
-      data: await Reservation.findOne({ _id: reservationId }),
+      data: await Reservation.findOne({ _id: req.params.reservationId }),
     });
   },
 
