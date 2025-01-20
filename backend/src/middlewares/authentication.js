@@ -14,8 +14,8 @@ module.exports = async (req, res, next) => {
 
     if (tokenKey) {
 
-        if (tokenKey[0] == 'Token') { // SimpleToken
-
+        if (tokenKey[0] == 'Token') { 
+            
             const tokenData = await Token.findOne({ token: tokenKey[1] }).populate('user_id')
             req.user = tokenData ? tokenData.user_id : undefined
 
