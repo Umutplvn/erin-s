@@ -5,8 +5,12 @@
 ------------------------------------------------------- */
 
 const Admin = require("../controllers/adminController");
+const auth = require("../controllers/auth");
 const router = require("express").Router();
 
+
+router.route("/login").post(auth.login)
+router.route("/logout").post(auth.logout)
 
 router.route("/").get(Admin.list)
 router.route("/create").post(Admin.create)
