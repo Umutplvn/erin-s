@@ -22,11 +22,10 @@ module.exports = {
     const reservationQrId = uuidv4()
 
     try {
-      const count = await Reservation.countDocuments({ date, timeSlot });
-      if (count >= 50) {
+      if (guests >= 50) {
         return res
           .status(400)
-          .json({ message: "This time slot is fully booked." });
+          .json({ message: "Please call 0851395554 to discuss details for events with 50+ guests." });
       }
       
 
