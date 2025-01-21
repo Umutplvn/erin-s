@@ -90,18 +90,30 @@ module.exports = {
 
 
   update: async (req, res) => {
+    const check= req.user.isConfirmedAdmin
+    let data=""
 
-    await Reservation.updateOne({ _id: req.params.reservationId }, req.body, {
-      runValidators: true,
-    });
+    if(check){
+      await Reservation.updateOne({ _id: req.params.reservationId }, req.body, {
+        runValidators: true,
+      });
+
+    data=await Reservation.findOne({ _id: req.params.reservationId })
+    }else{
+     
+        data="Only admin can update this data!"
+      
+    }
 
     res.status(200).send({
       error: false,
-      data: await Reservation.findOne({ _id: req.params.reservationId }),
+      data
     });
   },
 
+
   delete: async (req, res) => {
+    
     const { reservationId } = req.body;
     const data = await Reservation.deleteOne({ _id: reservationId });
 
