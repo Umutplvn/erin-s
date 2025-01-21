@@ -9,7 +9,14 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   list: async (req, res) => {
-    const data = await req.getModelList(Reservation);
+    const check= req.user.isConfirmedAdmin //! Auth Check - Check if the account is authorized
+    let data=""
+    
+    if(check){
+       data = await req.getModelList(Reservation);
+    }else{
+      data="Only admin can view this data"
+    }
 
     res.status(200).send({
       error: false,

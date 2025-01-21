@@ -42,10 +42,9 @@ module.exports = {
     try {
       const token = req?.headers?.authorization || false;
       let message = "";
-console.log(token);
 
       if (token) {
-        await Token.deleteOne({ token:`Token ${token}` });
+        await Token.deleteOne({ token });
         message = "Successfully logged out.";
       } else {
         message = "Logout failed.";

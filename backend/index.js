@@ -44,7 +44,7 @@ app.all('/', (req, res)=>{
 /*--------------------------------------*/
 
 //! Routes:
-app.use("/admin", require('./src/roots/adminRoot'))
+app.use("/admin", require('./src/roots/adminRoot')) // Login-Logout-Admin Roots
 app.use("/token", require('./src/roots/tokenRoot'))
 app.use("/reservation", require('./src/roots/reservationRoot'))
 
