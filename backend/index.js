@@ -9,12 +9,12 @@ const app=express()
 require('dotenv').config()
 const PORT=process.env.PORT
 const HOST=process.env.HOST
-
+const {deletePastReservations} = require('./src/cron/jobs')
 /*--------------------------------------*/
 
 app.use(express.json())
 app.use(require('cors')())
-
+deletePastReservations()
 /*--------------------------------------*/
 
 //! Connect to MongoDB with Mongoose:

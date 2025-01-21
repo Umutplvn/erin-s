@@ -113,10 +113,10 @@ module.exports = {
 
 
   delete: async (req, res) => {
-    
+
     const { reservationId } = req.body;
     const data = await Reservation.deleteOne({ _id: reservationId });
-
+    
     if (data.deletedCount >= 1) {
       res.send({
         message: "Reservation successfully deleted",
