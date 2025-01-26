@@ -98,7 +98,6 @@ const mailOptions={
     />
   </div>
 
-  <!-- Reservation Details -->
   <div
     style="
       display: flex;
@@ -202,7 +201,6 @@ const mailOptions={
       </h1>
     </div>
 
-    <!-- Web Icons -->
     <div
       style="
         width: 300px;
@@ -303,7 +301,6 @@ const mailOptions={
       </div>
     </div>
 
-    <!-- Contact Us -->
     <div
       style="
         display: flex;
@@ -334,6 +331,13 @@ const mailOptions={
 }
 
 
+try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent: ' + info.response);
+  } catch (error) {
+    console.error('Error sending email: ', error);
+    throw error;  
+  }
 
 }
 
