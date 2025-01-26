@@ -27,7 +27,6 @@ module.exports = {
 
   create: async (req, res) => {
     const { date, timeSlot, full_name, email, phone, guests } = req.body;
-    const reservationQrId = uuidv4()
 
     try {
       if (guests >= 50) {
@@ -35,9 +34,11 @@ module.exports = {
           .status(400)
           .json({ message: "Please call 0851395554 to discuss details for events with 50+ guests." });
       }
-      
 
-      const qrCode = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${reservationQrId}`;
+      const dataString = `date=${date}&timeSlot=${timeSlot}&full_name=${full_name}&email=${email}&phone=${phone}&guests=${guests}`;
+
+
+      const qrCode = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${dataString}`;
 
       await reservationConfirmEmail(date, timeSlot, full_name, email, phone, guests, qrCode)
       const data = await Reservation.create({
@@ -48,14 +49,12 @@ module.exports = {
         phone,
         guests,
         qrCode,
-        reservationQrId
       });
 
       res.status(201).send({
         error: false,
-        data,
-        reservationQrId,
-      });
+        data
+            });
     } catch (error) {
       res.status(500).json({ message: "Error creating reservation", error });
     }
@@ -71,24 +70,6 @@ module.exports = {
     });
   },
 
-  scan:async(req, res)=>{
-    const { reservationQrId } = req.params; 
-
-    try {
-      const data = await Reservation.findOne({ reservationQrId });
-      if (!data) {
-        return res.status(404).json({ message: "Reservation not found." });
-      }
-  
-      res.status(200).send({
-        error: false,
-        data,
-      });
-    } catch (error) {
-      res.status(500).json({ message: "Error retrieving reservation", error });
-    }
-    
-    },
 
 
   update: async (req, res) => {
