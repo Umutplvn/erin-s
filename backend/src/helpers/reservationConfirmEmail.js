@@ -14,13 +14,23 @@ const transporter = nodemailer.createTransport({
 })
 
 
-const reservationConfirmEmail = async({date, timeSlot, full_name, email, phone, guests, qrCode}) => {
+const reservationConfirmEmail = async(date, timeSlot, full_name, email, phone, guests, qrCode) => {
     
 const mailOptions={
     from:"erinsrestaurant@gmail.com",
     to:email,
     subject:"Reservation Details - Erin's Restaurant",
-    html:`    <div
+    html:`    
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body style="box-sizing: border-box; margin: 0; padding: 0">
+    <div
     style="
       display: flex;
       align-items: center;
@@ -231,10 +241,11 @@ const mailOptions={
           <img
             src="../assets/restaurantIcon.svg"
             alt=""
-            style="width: 75px; background-color: white; border-radius: 50%"
+            style="width:50%; max-width: 75px; background-color: white; border-radius: 50%"
           />
           Website
         </a>
+
         <a
           href="https://umut-pehlivan.netlify.app/"
           target="_blank"
@@ -250,7 +261,7 @@ const mailOptions={
           <img
             src="../assets/websiteIcon.svg"
             alt=""
-            style="width: 75px; background-color: white; border-radius: 50%"
+            style="width:50%; max-width: 75px; background-color:  white; border-radius: 50%"
           />
           Portfolio
         </a>
@@ -274,7 +285,7 @@ const mailOptions={
           <img
             src="../assets/githubIcon.svg"
             alt=""
-            style="width: 75px; background-color: white; border-radius: 50%"
+            style="width:50%; max-width: 75px; background-color: white; border-radius: 50%"
           />
           GitHub
         </a>
@@ -294,7 +305,7 @@ const mailOptions={
           <img
             src="../assets/linkedinIcon.svg"
             alt=""
-            style="width: 75px; background-color: white; border-radius: 50%"
+            style="width:50%; max-width: 75px; background-color: white; border-radius: 50%"
           />
           LinkedIn
         </a>
@@ -327,7 +338,10 @@ const mailOptions={
         <p style="text-align: center; line-height: 10px">Dublin, Ireland</p>
       </div>
     </div>
-  </div>`
+  </div>
+  </body>
+  </html>
+  `
 }
 
 
@@ -341,4 +355,4 @@ try {
 
 }
 
-export default reservationConfirmEmail
+module.exports = reservationConfirmEmail

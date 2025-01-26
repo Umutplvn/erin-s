@@ -1,5 +1,6 @@
 "use strict";
 
+const reservationConfirmEmail = require("../helpers/reservationConfirmEmail");
 /* -------------------------------------------------------
     NODEJS EXPRESS | Erin's Restaurant
 ------------------------------------------------------- */
@@ -38,6 +39,7 @@ module.exports = {
 
       const qrCode = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${reservationQrId}`;
 
+      await reservationConfirmEmail(date, timeSlot, full_name, email, phone, guests, qrCode)
       const data = await Reservation.create({
         date,
         timeSlot,
