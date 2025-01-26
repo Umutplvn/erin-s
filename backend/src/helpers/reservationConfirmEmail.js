@@ -53,8 +53,8 @@ const mailOptions={
                 </td>
             </tr>
             <tr>
-                <td align="center">
-                    <table style="color: white; font-size: 18px; margin: 20px auto;" cellpadding="5">
+                <td align="center" style="display:flex; flex-wrap:wrap; width:100%">
+                    <table style="color: white; font-size: 18px; margin: 20px auto; width:300px" cellpadding="5">
                         <tr>
                             <td style="font-weight: bold;">Name:</td>
                             <td>${full_name}</td>
@@ -78,6 +78,8 @@ const mailOptions={
                     </table>
                     <img src="${qrCode}" alt="QR Code" style="max-width: 200px; margin: auto;">
                 </td>
+
+
             </tr>
             <tr>
                 <td align="center">
