@@ -6,7 +6,6 @@ const reservationConfirmEmail = require("../helpers/reservationConfirmEmail");
 ------------------------------------------------------- */
 
 const Reservation = require("../models/reservationModel");
-const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   list: async (req, res) => {
