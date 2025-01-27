@@ -10,7 +10,7 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   list: async (req, res) => {
-    const check= req.user.isConfirmedAdmin //! Auth Check - Check if the account is authorized
+    const check= req.user.isConfirmedAdmin 
     let data=""
     
     if(check){
