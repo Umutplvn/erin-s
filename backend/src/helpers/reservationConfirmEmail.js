@@ -1,26 +1,32 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     NODEJS EXPRESS | Erin's Restaurant
 ------------------------------------------------------- */
 
-const nodemailer=require('nodemailer')
+const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-    service:"Gmail",
-    auth:{
-        user:"erinsrestaurant@gmail.com",
-        pass:process.env.pass 
-    }
-})
+  service: "Gmail",
+  auth: {
+    user: "erinsrestaurant@gmail.com",
+    pass: process.env.pass,
+  },
+});
 
-
-const reservationConfirmEmail = async(date, timeSlot, full_name, email, phone, guests, qrCode) => {
-    
-const mailOptions={
-    from:"erinsrestaurant@gmail.com",
-    to:email,
-    subject:"Reservation Details - Erin's Restaurant",
-    html:` <!DOCTYPE html>
+const reservationConfirmEmail = async (
+  date,
+  timeSlot,
+  full_name,
+  email,
+  phone,
+  guests,
+  qrCode
+) => {
+  const mailOptions = {
+    from: "erinsrestaurant@gmail.com",
+    to: email,
+    subject: "Reservation Details - Erin's Restaurant",
+    html: ` <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -91,18 +97,16 @@ const mailOptions={
             </tr>
         </table>
     </body>
-    </html>`
-}
+    </html>`,
+  };
 
-
-try {
+  try {
     const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent: ' + info.response);
+    console.log("Email sent: " + info.response);
   } catch (error) {
-    console.error('Error sending email: ', error);
-    throw error;  
+    console.error("Error sending email: ", error);
+    throw error;
   }
+};
 
-}
-
-module.exports = reservationConfirmEmail
+module.exports = reservationConfirmEmail;
