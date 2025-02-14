@@ -17,7 +17,6 @@ module.exports = async (req, res, next) => {
             const tokenData = await Token.findOne({ token: auth}).populate('user_id')
             req.user = tokenData ? tokenData.user_id : undefined
         } else if (tokenKey[0] == 'Bearer') { // JWT
-
             jwt.verify(tokenKey[1], process.env.ACCESS_KEY, (err, userData) => req.user = userData)
         }
     }
