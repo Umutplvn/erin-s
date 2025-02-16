@@ -51,6 +51,5 @@ app.use("/reservation", require('./src/roots/reservationRoot'))
 
 //! errorHandler:
 app.use( require('./src/errorHandler'))
-
 /*--------------------------------------*/
 app.listen(PORT, ()=>console.log(`App is running: ${HOST}:${PORT} `))
