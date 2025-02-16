@@ -41,7 +41,6 @@ const adminSchema = new mongoose.Schema({
     }
 
 
-
 }, {collection:"admins", timeStamps:true})
 
 
