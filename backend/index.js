@@ -14,6 +14,7 @@ const {deletePastReservations} = require('./src/cron/jobs')
 app.use(express.json())
 app.use(require('cors')())
 deletePastReservations()
+
 /*--------------------------------------*/
 
 //! Connect to MongoDB with Mongoose:
