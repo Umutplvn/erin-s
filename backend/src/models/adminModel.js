@@ -8,7 +8,6 @@ const express = require('express')
 const mongoose=require("mongoose")
 
 const adminSchema = new mongoose.Schema({
-
     email: {
         type: String,
         trim: true,
@@ -16,7 +15,7 @@ const adminSchema = new mongoose.Schema({
         unique: true,
         index: true
     },
-
+    
     password: {
         type: String,
         trim: true,
