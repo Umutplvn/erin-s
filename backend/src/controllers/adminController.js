@@ -19,7 +19,6 @@ module.exports = {
   },
 
   create: async (req, res) => {
-
     req.body.isConfirmedAdmin=false
     const {password}=req.body
     req.body.password=passwordEncrypt(password)
