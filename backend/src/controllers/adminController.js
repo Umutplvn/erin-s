@@ -37,7 +37,6 @@ module.exports = {
 
   read: async (req, res) => {
 
-    // const filters= (req.user.isConfirmedAdmin) ? {_id:req.params.id} : false
     const data= await Admin.findOne({_id:req.params.id})
 
     res.status(200).send({
