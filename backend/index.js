@@ -36,14 +36,14 @@ app.use(require('./src/middlewares/findSearchSortPage'))
 app.all('/', (req, res)=>{
     res.send({
         err:false,
-        message:'Welcome to Chat APP',
+        message:`Welcome to Erin's Restaurant`,
     })
 })
 
 /*--------------------------------------*/
 
 //! Routes:
-app.use("/admin", require('./src/roots/adminRoot')) // Login-Logout-Admin Roots
+app.use("/admin", require('./src/roots/adminRoot')) 
 app.use("/token", require('./src/roots/tokenRoot'))
 app.use("/reservation", require('./src/roots/reservationRoot'))
 
