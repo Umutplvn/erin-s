@@ -1,45 +1,89 @@
-# Getting Started with Create React App
+# Erin's Restaurant — Full-Stack Reservation & Administration Platform (`erin-s`)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack restaurant table reservation and administration web application built with **Node.js, Express, MongoDB (Mongoose), and React (Redux Toolkit + Material UI)**. It supports online table bookings with party-size validation, automated QR code pass generation, email confirmations via Nodemailer, scheduled cleanup of past reservations via `node-cron`, and role-based administrator management.
 
-## Available Scripts
+## Who It's For
+- Independent restaurants and hospitality venues seeking a self-hosted table reservation system with QR-code booking confirmations and an administrative back-office API.
 
-In the project directory, you can run:
+## Tech Stack
+### Backend (`backend/`)
+- **Runtime & Framework:** Node.js, Express (`^4.21.2`), `express-async-errors`
+- **Database & ODM:** MongoDB, Mongoose (`^8.9.5`)
+- **Authentication & Security:** Token & JWT authentication (`jsonwebtoken`), PBKDF2-SHA512 password hashing (`node:crypto`), `cors`
+- **Notifications & Scheduling:** `nodemailer` (HTML confirmation emails with embedded QR codes), `node-cron` (daily cleanup of expired reservations)
+- **API Documentation:** Swagger / OpenAPI (`backend/src/configs/swagger.json`)
 
+### Frontend (`frontend/`)
+- **Framework:** React 18 (`react`, `react-dom`, `react-router-dom` v6)
+- **State Management:** Redux Toolkit (`@reduxjs/toolkit`, `react-redux`)
+- **UI Library:** Material UI (`@mui/material`, `@emotion/react`, `@emotion/styled`), `react-toastify`
+- **HTTP Client:** Axios (`axios`)
 
-### `npm start`
+## Project Structure
+```text
+erin-s/
+├── backend/
+│   ├── src/
+│   │   ├── configs/        # MongoDB connection & Swagger specification
+│   │   ├── controllers/    # Auth, Admin, Token, and Reservation controllers
+│   │   ├── cron/           # Scheduled cron jobs (deletePastReservations)
+│   │   ├── helpers/        # PBKDF2 password encryption & Nodemailer HTML email helper
+│   │   ├── middlewares/    # Authentication & search/sort/pagination middleware
+│   │   ├── models/         # Mongoose schemas (Admin, Reservation, Token)
+│   │   ├── roots/          # Express route definitions (/admin, /token, /reservation)
+│   │   └── errorHandler.js # Centralized Express error handler
+│   ├── test/               # Automated unit tests (Node.js test runner)
+│   ├── .env.example        # Backend environment variable template
+│   ├── index.js            # Express application entry point
+│   └── package.json
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── app/            # Redux store configuration
+│   │   ├── helper/         # Toast notification helpers
+│   │   ├── App.js
+│   │   └── index.js
+│   ├── .env.example        # Frontend environment variable template
+│   └── package.json
+├── LICENSE                 # MIT License
+└── ROADMAP.md              # Planned 25+ hour development roadmap
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Prerequisites
+- Node.js (v18+ or v20+ recommended)
+- MongoDB instance (local or MongoDB Atlas)
 
-### `npm test`
+### 1. Backend Setup
+```bash
+cd backend
+cp .env.example .env
+# Edit .env with your MongoDB URI and SMTP credentials
+npm install
+node index.js
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. Frontend Setup
+```bash
+cd frontend
+cp .env.example .env
+npm install
+npm start
+```
 
-### `npm run build`
+### Running Tests
+```bash
+cd backend
+npm test
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Planned Work & Roadmap
+See [ROADMAP.md](./ROADMAP.md) for the full 25+ hour development roadmap, including:
+- Customer reservation wizard & real-time slot capacity checking in React/MUI
+- Admin reservation management portal & QR code check-in scanner
+- Request validation, rate limiting, and atomic capacity enforcement
+- Expanded unit/integration test coverage and CI workflow
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-
-
-
+## License
+Distributed under the **MIT License**. See [LICENSE](./LICENSE) for details.
